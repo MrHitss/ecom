@@ -2,17 +2,31 @@ import React, { useState } from "react";
 import { IoMdLogIn } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from '../../../store/slices/authSlice';
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { loading, error } = useSelector(state => state.auth);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(login({ email, password }));
+        console.log('Form submitted with:', { email, password });
+
+        dispatch(login({ email, password }))
+            .then((result) => {
+                if (login.fulfilled.match(result)) {
+                    navigate('/');
+                } else {
+                    console.error('Login failed:', result.error);
+                }
+            })
+            .catch((err) => {
+                console.error('Login error:', err);
+            });
       };
 
     return (

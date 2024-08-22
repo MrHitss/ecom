@@ -3,9 +3,10 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FrontLayout from './components/layout/frontLayout/Index';
-import Home from './components/front/home/Index';
+import Home from './components/front/Home';
 import Login from './components/layout/authLayout/Login';
 import ProtectedRoute from './components/utils/ProtectedRoute';
+import Products from './components/front/Products';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
 
         <Route element={<ProtectedRoute redirectTo={"/login"} />}>
           <Route element={<FrontLayout />}>
-            <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
           </Route>
         </Route>
         

@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchBooks } from '../../api/api';
 
-export const books = createAsyncThunk('books', async (credentials) => {
-    return await fetchBooks(credentials);
+export const books = createAsyncThunk('books', async () => {
+    return await fetchBooks();
 });
 
 const booksSlice = createSlice({
@@ -19,7 +19,7 @@ const booksSlice = createSlice({
         })
         .addCase(books.fulfilled, (state, action) => {
           state.loading = false;
-          state.user = action.payload;
+          state.books = action.payload;
         })
         .addCase(books.rejected, (state, action) => {
           state.loading = false;
